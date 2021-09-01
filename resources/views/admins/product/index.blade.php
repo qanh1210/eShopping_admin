@@ -13,7 +13,7 @@
 @section('content')
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-   @include('partials.content-header',['name' => 'Products', 'key' => 'List of'])
+   @include('partials.content-header',['route' => route('product.index'),'name' => 'Products', 'key' => 'List of'])
     <!-- Main content -->
     <div class="content">
       <div class="container-fluid">

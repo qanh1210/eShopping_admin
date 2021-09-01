@@ -67,4 +67,5 @@ class MenuController extends Controller
       return $this->deleteModelTrait($id,$this->menu);
     }
 
+
 }

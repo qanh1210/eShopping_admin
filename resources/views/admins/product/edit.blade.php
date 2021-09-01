@@ -13,7 +13,7 @@
 @section('content')
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-    @include('partials.content-header',['name' => 'Edit', 'key' => 'Product'])
+    @include('partials.content-header',['route' => route('product.index'),'name' => 'Edit', 'key' => 'Product'])
 
     <!-- Main content -->
     <form action="{{ route('product.update',['id' => $productEdit->id]) }}" method="post" enctype="multipart/form-data">

@@ -9,7 +9,7 @@
 @section('content')
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-        @include('partials.content-header',['name' => 'Setting', 'key' => 'Add'])
+        @include('partials.content-header',['route' => route('setting.index'),'name' => 'Setting', 'key' => 'Add'])
 
         <!-- Main content -->
         <div class="content">

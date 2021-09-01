@@ -13,7 +13,7 @@
 @section('content')
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-    @include('partials.content-header',['name' => 'Add', 'key' => 'Slider'])
+    @include('partials.content-header',['route' => route('slider.index'),'name' => 'Add', 'key' => 'Slider'])
 
     <!-- Main content -->
     <form action="{{ route('slider.store') }}" method="post" enctype="multipart/form-data">

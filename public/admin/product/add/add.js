@@ -7,7 +7,7 @@ $(function() {
       $(".select2_init").select2({
         placeholder: "Select category",
         allowClear: true
-    });
+      });
     
     let editor_config = {
         path_absolute : "/",

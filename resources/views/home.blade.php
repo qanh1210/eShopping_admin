@@ -23,7 +23,7 @@
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>  --}}
-    @include('partials.content-header',['name' => 'Home Page', 'key' => null])
+    @include('partials.content-header',['route' => route('home'),'name' => 'Home Page', 'key' => null])
 
     <!-- /.content-header -->
 
@@ -31,9 +31,9 @@
     <div class="content">
       <div class="container-fluid">
         <div class="row">
-          
+
             <div class="col-md-12">
-                
+
             </div>
             <!-- /.col-md-12 -->
 

@@ -132,6 +132,25 @@
           <i class="fas fa-th-large"></i>
         </a>
       </li>
+
+      <li class="nav-item dropdown">
+          <a class="nav-link" data-toggle="dropdown" href="#">
+            <i class="far fa-user"></i>
+          </a>
+          <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+            <span class="dropdown-header">{{ Auth::user()->name }}</span>
+
+            <div class="dropdown-divider"></div>
+            <a href="{{ route('users.profile') }}" class="dropdown-item">
+              <i class="far fa-id-card"></i> Profile
+            </a>
+
+            <div class="dropdown-divider"></div>
+            <a href="{{ route('logout') }}" class="dropdown-item">
+              <i class="fas fa-sign-out-alt"></i>Log out
+            </a>
+          </div>
+      </li>
     </ul>
   </nav>
   <!-- /.navbar -->

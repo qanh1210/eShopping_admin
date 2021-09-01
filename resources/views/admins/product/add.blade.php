@@ -13,7 +13,7 @@
 @section('content')
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-    @include('partials.content-header',['name' => 'Add', 'key' => 'Product'])
+    @include('partials.content-header',['route' => route('product.index'),'name' => 'Add', 'key' => 'Product'])
 
     {{-- <div class="col-md-12">
         @if ($errors->any())
@@ -55,7 +55,7 @@
                           value="{{ old('price') }}">
                           @error('price')
                           <div class="alert alert-danger">{{ $message }}</div>
-                      @enderror
+                         @enderror
                     </div>
 
                     <div class="form-group">

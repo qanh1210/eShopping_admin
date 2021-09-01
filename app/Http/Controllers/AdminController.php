@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Redis;
 class AdminController extends Controller
 {
     public function getLogin(){
@@ -17,6 +17,8 @@ class AdminController extends Controller
 
 
     }
+
+
 
     public function postLogin(Request $request){
         $email = $request['email'];

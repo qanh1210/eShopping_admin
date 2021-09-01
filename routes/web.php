@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,31 +12,45 @@ use App\Http\Controllers\CategoryController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/',[
-        'as' => 'login.getLogin',
-        'uses' => 'App\Http\Controllers\AdminController@getLogin'
-]);
-
-Route::post('/home',[
-    'as' => 'login.postLogin',
-    'uses' => 'App\Http\Controllers\AdminController@postLogin'
-]);
-
-Route::get('/home',function(){
-    return view('home');
+Route::get('/', function () {
+    return view('auth.login');
 });
 
+
+Route::get('/home', function () {
+    return view('home');
+})->middleware(['auth'])->name('home');
+
+require __DIR__.'/auth.php';
+
+
+// Route::get('/',[
+//     'as' => 'login.getLogin',
+//     'uses' => 'App\Http\Controllers\AdminController@getLogin'
+// ]);
+
+// Route::post('/home',[
+// 'as' => 'login.postLogin',
+// 'uses' => 'App\Http\Controllers\AdminController@postLogin'
+// ]);
+
+// Route::get('/home',function(){
+// return view('home');
+// });
+
 Route::prefix('admins')->group(function(){
-    //categories
+//categories
     Route::prefix('categories')->group(function () {
-        Route::get('/list_categories',[
+        Route::get('/list_category',[
             'as' => 'categories.index',
-            'uses' => 'App\Http\Controllers\CategoryController@index'
+            'uses' => 'App\Http\Controllers\CategoryController@index',
+            'middleware' => 'can:list-category'
         ]);
 
         Route::get('/create',[
             'as' => 'categories.create',
-            'uses' => 'App\Http\Controllers\CategoryController@create'
+            'uses' => 'App\Http\Controllers\CategoryController@create',
+            'middleware' => 'can:add-category'
         ]);
 
         Route::post('/store',[
@@ -47,12 +60,14 @@ Route::prefix('admins')->group(function(){
 
         Route::get('/edit/{id}',[
             'as' => 'categories.edit',
-            'uses' => 'App\Http\Controllers\CategoryController@edit'
+            'uses' => 'App\Http\Controllers\CategoryController@edit',
+            'middleware' => 'can:edit-category'
         ]);
 
         Route::get('/delete/{id}',[
             'as' => 'categories.delete',
-            'uses' => 'App\Http\Controllers\CategoryController@delete'
+            'uses' => 'App\Http\Controllers\CategoryController@delete',
+            'middleware' => 'can:delete-category'
         ]);
 
         Route::post('/update/{id}',[
@@ -60,7 +75,6 @@ Route::prefix('admins')->group(function(){
             'uses' => 'App\Http\Controllers\CategoryController@update'
         ]);
     });
-
 
     //menus
     Route::prefix('menus')->group(function () {
@@ -193,5 +207,91 @@ Route::prefix('admins')->group(function(){
             'uses' => 'App\Http\Controllers\AdminSettingController@delete'
         ]);
     });
-});
 
+    //user
+    Route::prefix('users')->group(function(){
+        Route::get('/',[
+            'as' => 'users.index',
+            'uses' => 'App\Http\Controllers\AdminUserController@index'
+        ]);
+
+        Route::get('/create',[
+            'as' => 'users.create',
+            'uses' => 'App\Http\Controllers\AdminUserController@create'
+        ]);
+
+
+        Route::post('/store',[
+            'as' => 'users.store',
+            'uses' => 'App\Http\Controllers\AdminUserController@store'
+        ]);
+
+        Route::get('/edit/{id}',[
+            'as' => 'users.edit',
+            'uses' => 'App\Http\Controllers\AdminUserController@edit'
+        ]);
+
+        Route::post('/update/{id}',[
+            'as' => 'users.update',
+            'uses' => 'App\Http\Controllers\AdminUserController@update'
+        ]);
+
+        Route::get('/delete/{id}',[
+            'as' => 'users.delete',
+            'uses' => 'App\Http\Controllers\AdminUserController@delete'
+        ]);
+
+        Route::get('/reset-password/{id}',[
+            'as' => 'users.reset-password',
+            'uses' => 'App\Http\Controllers\AdminUserController@showFormResetPassword'
+        ]);
+        Route::post('/reset-password/{id}',[
+            'as' => 'users.reset-password',
+            'uses' => 'App\Http\Controllers\AdminUserController@resetPassword'
+        ]);
+
+        Route::get('/profile',[
+            'as' => 'users.profile',
+            'uses' => 'App\Http\Controllers\AdminUserController@profile'
+        ]);
+        Route::post('/change-password',[
+            'as' => 'users.change-password',
+            'uses' => 'App\Http\Controllers\AdminUserController@changePassword'
+        ]);
+    });
+
+    //Roles
+    Route::prefix('roles')->group(function(){
+        Route::get('/',[
+            'as' => 'roles.index',
+            'uses' => 'App\Http\Controllers\AdminRoleController@index'
+        ]);
+
+        Route::get('/create',[
+            'as' => 'roles.create',
+            'uses' => 'App\Http\Controllers\AdminRoleController@create'
+        ]);
+
+
+        Route::post('/store',[
+            'as' => 'roles.store',
+            'uses' => 'App\Http\Controllers\AdminRoleController@store'
+        ]);
+
+        Route::get('/edit/{id}',[
+            'as' => 'roles.edit',
+            'uses' => 'App\Http\Controllers\AdminRoleController@edit'
+        ]);
+
+        Route::post('/update/{id}',[
+            'as' => 'roles.update',
+            'uses' => 'App\Http\Controllers\AdminRoleController@update'
+        ]);
+
+        Route::get('/delete/{id}',[
+            'as' => 'roles.delete',
+            'uses' => 'App\Http\Controllers\AdminRoleController@delete'
+        ]);
+    });
+
+});

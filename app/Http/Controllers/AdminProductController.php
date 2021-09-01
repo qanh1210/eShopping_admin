@@ -15,7 +15,7 @@ use App\Traits\StorageImageTrait;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-
+use Illuminate\Support\Facades\Redis;
 
 
 class AdminProductController extends Controller
@@ -38,32 +38,19 @@ class AdminProductController extends Controller
 
     public function index()
     {
-        // $list = DB::table('products','p')
-        // ->select(
-        //     'p.id',
-        //     'p.name',
-        //     'p.price',
-        //     'p.feature_image_path',
-        //     'c.name as category',
-        // )
-        // -> leftJoin('categories as c','p.category_id','=','c.id')
-        // ->orderBy('p.created_at', 'ASC')
-        // ->paginate(5);
-        $list = $this->product->latest()->paginate(5);
+        $list = $this->product->select('id','name','price','feature_image_path','category_id')->latest('id')->simplePaginate(5);
+//        $list = Product::all(['id','name','price','feature_image_path','category_id']);
+//        $list = DB::table('products')->select('id','name','price','feature_image_path','category_id')->get();
         return view('admins.product.index',compact('list'));
     }
 
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $htmlOptions = $this->getCategory($parent_id='');
         return view('admins.product.add',compact('htmlOptions'));
     }
+
+
 
     public function getCategory($parent_id){
         $data = $this->category->all();
@@ -73,12 +60,15 @@ class AdminProductController extends Controller
     }
 
 
+
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+
     public function store(ProductAddRequest $request)
     {
         try{
@@ -178,7 +168,7 @@ class AdminProductController extends Controller
 
             $this->product->find($id)->update($dataProductUpdate);
             $product = $this->product->find($id);
-            
+
             //insert image detail to table Product_image
             if($request->hasFile('image_path')){
                 $this->productImage->where('product_id',$id)->delete();
@@ -190,6 +180,7 @@ class AdminProductController extends Controller
                     ]);
                 }
             }
+
 
 
             //insert tags for product
@@ -222,6 +213,7 @@ class AdminProductController extends Controller
     {
         //
     }
+
 
     public function delete($id){
        return $this->deleteModelTrait($id,$this->product);

@@ -1,13 +1,13 @@
 @extends('layouts.admin')
 
 @section('title')
-    <title>Admin</title>
+    <title>Add category</title>
 @endsection
 
 @section('content')
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-    @include('partials.content-header',['name' => 'Add', 'key' => 'Category']);
+    @include('partials.content-header',['route' => route('categories.index'),'name' => 'Add', 'key' => 'Category']);
 
     <!-- Main content -->
     <div class="content">

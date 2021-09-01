@@ -7,7 +7,7 @@
 @section('content')
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-    @include('partials.content-header',['name' => 'Menu', 'key' => 'Add']);
+    @include('partials.content-header',['route' => route('menus.index'),'name' => 'Menu', 'key' => 'Add']);
 
     <!-- Main content -->
     <div class="content">
