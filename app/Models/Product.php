@@ -23,4 +23,8 @@ class Product extends Model
         return $this->belongsTo(Category::class,'category_id');
     }
 
+    public function getCollections(){
+        return $this->belongsToMany(Collections::class,'product_collection','product_id','collection_id');
+    }
+
 }

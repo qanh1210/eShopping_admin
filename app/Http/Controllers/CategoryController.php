@@ -22,7 +22,6 @@ class CategoryController extends Controller
     public function __construct(Category $category)
     {
         $this->category = $category;
-
     }
 
     public function index(Request $request)
@@ -33,31 +32,17 @@ class CategoryController extends Controller
                 'c1.id',
                 'c1.name',
                 'c2.name as parent_name',
+                'c1.slug'
             )
             ->leftJoin('categories as c2', 'c1.parent_id', '=', 'c2.id')
             ->orderBy('c1.id', 'ASC')
-            ->paginate(5);
+            ->simplePaginate(15);
         if($request->ajax()){
             return view('admins.category.list',compact('list'))->render();
         }
         return view('admins.category.index', compact('list'));
 
     }
-
-//    public function getMoredata(Request $request){
-//        if($request->ajax()){
-//            $list = DB::table('categories', 'c1')
-//                ->select(
-//                    'c1.id',
-//                    'c1.name',
-//                    'c2.name as parent_name',
-//                )
-//                ->leftJoin('categories as c2', 'c1.parent_id', '=', 'c2.id')
-//                ->orderBy('c1.created_at', 'ASC')
-//                ->paginate(5);
-//        }
-//    }
-
 
     public function create()
     {
@@ -70,20 +55,25 @@ class CategoryController extends Controller
         $this->category->create([
             'name' => $request->name,
             'parent_id' => $request->parent_id,
-            'slug' => Str::slug($request->name)
+            'slug' => $request->slug
         ]);
         return redirect()->route('categories.index');
     }
 
-    public function show($id)
+    public function storeNewParent(Request $request)
     {
-        //
+        $this->category->create([
+            'name' => $request->name,
+            'parent_id' => 0,
+            'slug' => $request->slug
+        ]);
+        return redirect()->route('categories.create');
     }
 
     public function getCategory($parent_id)
     {
-        $data = $this->category->all();
-//        $data = DB::table('categories')->cursor();
+//        $data = $this->category->all();
+        $data = Category::all(['id', 'name','parent_id']);
         $recursive = new Recusive($data);
         $htmlOptions = $recursive->categoryRecusive($parent_id);
         return $htmlOptions;
@@ -94,7 +84,7 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $category = Category::select(['id', 'name'])->find($id);
+        $category = Category::select(['id', 'name','slug'])->find($id);
         $htmlOptions = $this->getCategory($category->parent_id);
         return view('admins.category.edit', compact('category', 'htmlOptions'));
     }
@@ -109,7 +99,7 @@ class CategoryController extends Controller
         $this->category->find($id)->update([
             'name' => $request->name,
             'parent_id' => $request->parent_id,
-            'slug' => Str::slug($request->name)
+            'slug' => $request->slug
         ]);
         return redirect()->route('categories.index');
 

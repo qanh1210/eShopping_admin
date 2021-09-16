@@ -52,6 +52,7 @@ class AdminSliderController extends Controller
             DB::beginTransaction();
             $data = [
                 'name' => $request->name,
+                'slogan' => $request->slogan,
                 'description' => $request->description
             ];
 
@@ -105,6 +106,7 @@ class AdminSliderController extends Controller
             DB::beginTransaction();
             $dataUpdate = [
                 'name' => $request->name,
+                'slogan' => $request->slogan,
                 'description' => $request->description
             ];
 

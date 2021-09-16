@@ -4,6 +4,7 @@
     <title>Admin</title>
 @endsection
 
+
 @section('content')
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -44,5 +45,38 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
+<!-- Modal -->
+<div class="modal fade" id="loginSuccess" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Welcome {{ Auth::user()->name }}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    You logged in with
+                    @foreach(Auth::user()->roles as $role)
+                        {{ $role->display_name }}
+                    @endforeach
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
+
+@section('js')
+    <script>
+        $(document).ready(function () {
+            $('#loginSuccess').modal('show');
+        })
+    </script>
 
 @endsection
+

@@ -49,9 +49,8 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-12">
-                        <a href="{{ route('categories.create') }}" class="btn btn-success float-right m-2 action-add">Add
-                            a
-                            category</a>
+                        <a href="{{ route('categories.create') }}" class="btn btn-success float-right m-2 action-add">
+                            Add a category</a>
                     </div>
                     <div class="col-md-12">
                         <div id="table-data">

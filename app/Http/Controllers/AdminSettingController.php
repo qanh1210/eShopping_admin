@@ -22,7 +22,7 @@ class AdminSettingController extends Controller
     }
     public function index()
     {
-        $list = $this->setting->latest()->paginate(5);
+        $list = $this->setting->latest()->get();
         return view('admins.setting.index',compact('list'));
     }
 

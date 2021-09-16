@@ -24,7 +24,7 @@ class AddSettingRequest extends FormRequest
     public function rules()
     {
         return [
-            'config_key' => 'required|unique:settings|max:255',
+            'config_key' => 'required|max:255',
             'config_value' => 'required'
         ];
     }

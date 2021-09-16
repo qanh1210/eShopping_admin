@@ -225,11 +225,11 @@ $(function () {
 
 $(function () {
     $('#change_password').on('click', function (e) {
-        $('#contact-modal').modal('show');
+        $('#change_password_modal').modal('show');
         e.preventDefault();
     });
 
-    $('#changePasswordForm_modal').on('submit', function (e) {
+    $('#form_modal').on('submit', function (e) {
         e.preventDefault();
         var formData = {
             current_password: $('#current_password').val(),
@@ -272,7 +272,7 @@ $(function () {
                         'Your password has been changed!',
                         'success'
                     );
-                    $('#changePasswordForm_modal').modal('hide');
+                    $('#form_modal').modal('hide');
                     window.location.reload();
                 }
             }
@@ -284,9 +284,8 @@ $(function () {
 $(function () {
     $(document).on('click', '.pagination a', function(e) {
         e.preventDefault();
-        // var page = $(this).attr('href').split('page=')[1];
         var url = $(this).attr('href');
-        getMoredata(url);
+            getMoredata(url);
         // window.history.pushState("", "", url);
     });
 
@@ -296,8 +295,11 @@ function getMoredata(url) {
     $.ajax({
         url: url,
     }).done(function (data) {
-        console.log(data);
+        // console.log(data);
         $('#table-data').html(data);
     });
 };
+
+
+
 

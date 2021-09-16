@@ -14,7 +14,7 @@
         <!-- Main content -->
 
         @include('partials.content-header',['route' => route('users.index'),'name' => 'User', 'key' => 'Reset Password'])
-        <form action="{{ route('users.reset-password',['id'=> $user->id]) }}" id="changePasswordForm" method="post"
+        <form action="{{ route('users.save_reset-password',['id'=> $user->id]) }}" id="changePasswordForm" method="post"
               enctype="multipart/form-data">
             <div class="content">
                 <div class="container-fluid">

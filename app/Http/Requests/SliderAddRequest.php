@@ -24,7 +24,8 @@ class SliderAddRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'bail|required|unique:products|max:255|min:10',
+            'name' => 'bail|required|unique:products|max:255|min:6',
+            'slogan' => 'required',
             'description' => 'required',
             'image_path'=> 'required'
         ];
@@ -34,6 +35,7 @@ class SliderAddRequest extends FormRequest
     {
         return [
             'name.required' => 'Name cannot be empty',
+            'slogan.required' => 'Slogan cannot be empty',
             'description.required' => 'Description cannot be empty',
             'name.unique' => 'Name cannot be duplicate',
             'name.max' => 'Name cannot be more than 255 characters',

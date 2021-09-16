@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 Route::get('/', function () {
     return view('auth.login');
-});
+})->middleware(['guest']);
 
 
 Route::get('/home', function () {
@@ -56,6 +56,11 @@ Route::prefix('admins')->group(function(){
         Route::post('/store',[
             'as' => 'categories.store',
             'uses' => 'App\Http\Controllers\CategoryController@store'
+        ]);
+
+        Route::post('/store_new_parent',[
+            'as' => 'categories.store_new_parent',
+            'uses' => 'App\Http\Controllers\CategoryController@storeNewParent'
         ]);
 
         Route::get('/edit/{id}',[
@@ -246,7 +251,7 @@ Route::prefix('admins')->group(function(){
             'uses' => 'App\Http\Controllers\AdminUserController@showFormResetPassword'
         ]);
         Route::post('/reset-password/{id}',[
-            'as' => 'users.reset-password',
+            'as' => 'users.save_reset-password',
             'uses' => 'App\Http\Controllers\AdminUserController@resetPassword'
         ]);
 

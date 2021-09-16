@@ -26,8 +26,9 @@
                             <thead>
                                 <tr>
                                     <th scope="col">ID</th>
-                                    <th scope="col">Slider name</th>
-                                    <th scope="col">Description</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Slogan</th>
+{{--                                    <th scope="col">Description</th>--}}
                                     <th scope="col">Image</th>
                                     <th scope="col">Action</th>
                                 </tr>
@@ -37,8 +38,9 @@
                                     <tr>
                                         <th scope="row">{{ $sliderItem->id }}</th>
                                         <td>{{ $sliderItem->name }}</td>
-                                        <td>{{ $sliderItem->description }}</td>
-                                        <td><img src="{{ $sliderItem->image_path }}" style="max-width: 100px" /></td>
+                                        <td>{{ $sliderItem->slogan }}</td>
+{{--                                        <td>{{ $sliderItem->description }}</td>--}}
+                                        <td><img src="{{ $sliderItem->image_path }}" style="max-width: 150px;" /></td>
 
                                         <td>
                                             <a href="{{ route('slider.edit', ['id' => $sliderItem->id]) }}"

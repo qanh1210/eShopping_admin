@@ -49,6 +49,7 @@
                                                 </div>
                                             </div>
                                         </td>
+
                                         <td>
                                             <a href="{{ route('users.edit', ['id' => $user->id]) }}"
                                                 class="btn btn-default">Edit</a>

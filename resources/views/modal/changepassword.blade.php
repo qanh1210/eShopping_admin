@@ -1,5 +1,5 @@
 {{--    modal form change password--}}
-<div id="contact-modal" class="modal fade" role="dialog">
+<div id="change_password_modal" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -7,8 +7,9 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
             </div>
-            <form id="changePasswordForm_modal" name="changePassword_modal" role="form"
+            <form id="form_modal" name="form_modal" role="form"
                   action="{{ route('users.change-password') }}" method="POST">
+                @csrf
                 <div class="modal-body">
                     <div class="form-group">
                         <label>Current password</label>

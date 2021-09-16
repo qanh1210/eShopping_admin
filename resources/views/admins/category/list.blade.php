@@ -25,6 +25,7 @@
         <th scope="col">ID</th>
         <th scope="col">Category name</th>
         <th scope="col">Category parent name</th>
+        <th scope="col">Slug</th>
         <th scope="col">Action</th>
     </tr>
     </thead>
@@ -40,6 +41,7 @@
                     {{ $category->parent_name }}
                 @endif
             </td>
+            <td>{{ $category->slug }}</td>
             <td>
                 <a href="{{ route('categories.edit',['id' => $category->id]) }}"
                    class="btn btn-default action-edit">Edit</a>
